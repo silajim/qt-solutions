@@ -43,21 +43,26 @@
 
 #include <QCoreApplication>
 
-#if defined(Q_OS_WIN)
-#  if !defined(QT_QTSERVICE_EXPORT) && !defined(QT_QTSERVICE_IMPORT)
-#    define QT_QTSERVICE_EXPORT
-#  elif defined(QT_QTSERVICE_IMPORT)
-#    if defined(QT_QTSERVICE_EXPORT)
-#      undef QT_QTSERVICE_EXPORT
-#    endif
-#    define QT_QTSERVICE_EXPORT __declspec(dllimport)
-#  elif defined(QT_QTSERVICE_EXPORT)
-#    undef QT_QTSERVICE_EXPORT
-#    define QT_QTSERVICE_EXPORT __declspec(dllexport)
-#  endif
-#else
-#  define QT_QTSERVICE_EXPORT
-#endif
+#include "qtservice_export.H"
+
+//#if defined(Q_OS_WIN)
+//#  if !defined(QT_QTSERVICE_EXPORT) && !defined(QT_QTSERVICE_IMPORT)
+//#    define QT_QTSERVICE_EXPORT
+//#  elif defined(QT_QTSERVICE_IMPORT)
+//#    if defined(QT_QTSERVICE_EXPORT)
+//#      undef QT_QTSERVICE_EXPORT
+//#    endif
+//#    define QT_QTSERVICE_EXPORT __declspec(dllimport)
+//#  elif defined(QT_QTSERVICE_EXPORT)
+//#    undef QT_QTSERVICE_EXPORT
+//#    define QT_QTSERVICE_EXPORT __declspec(dllexport)
+//#  endif
+//#else
+//#  define QT_QTSERVICE_EXPORT
+//#endif
+
+#define QT_QTSERVICE_EXPORT
+//QTSERVICE_EXPORT;
 
 class QStringList;
 class QtServiceControllerPrivate;
