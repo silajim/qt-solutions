@@ -43,7 +43,7 @@
 
 #include <QCoreApplication>
 
-#include "qtservice_export.H"
+#include "qtservice_export.h"
 
 //#if defined(Q_OS_WIN)
 //#  if !defined(QT_QTSERVICE_EXPORT) && !defined(QT_QTSERVICE_IMPORT)
