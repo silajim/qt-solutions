@@ -44,6 +44,7 @@
 #include <QCoreApplication>
 
 #include "qtservice_export.h"
+#include <QStringList>
 
 //#if defined(Q_OS_WIN)
 //#  if !defined(QT_QTSERVICE_EXPORT) && !defined(QT_QTSERVICE_IMPORT)
@@ -64,7 +65,7 @@
 #define QT_QTSERVICE_EXPORT
 //QTSERVICE_EXPORT;
 
-class QStringList;
+//class QStringList;
 class QtServiceControllerPrivate;
 
 class QT_QTSERVICE_EXPORT QtServiceController

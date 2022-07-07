@@ -19,8 +19,9 @@ set_target_properties(QtService PROPERTIES AUTOMOC TRUE)
 set_target_properties(QtService PROPERTIES AUTOUIC TRUE)
 set_target_properties(QtService PROPERTIES AUTORCC TRUE)
 
+find_package(QT NAMES Qt6 Qt5 COMPONENTS Core Quick REQUIRED)
 
-find_package(Qt5 COMPONENTS Core Network REQUIRED)
+find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Network REQUIRED)
 
 target_include_directories(QtService PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
@@ -45,6 +46,6 @@ endif()
 target_include_directories(QtService PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>  ${PROJECT_BINARY_DIR})
 #set_property(TARGET QtService PROPERTY  MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
 target_compile_definitions(QtService PRIVATE  $<CONFIG:Debug>:"_DEBUG"> $<CONFIG:Release>"NDEBUG">  "WIN32;"        "_CONSOLE;"        "UNICODE;"        "_UNICODE"       )
-target_link_libraries(QtService PUBLIC Qt5::Core Qt5::Network user32)
+target_link_libraries(QtService PUBLIC Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Network user32)
 
 generate_export_header(QtService)
