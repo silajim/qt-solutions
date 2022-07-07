@@ -8,6 +8,8 @@ endif()
 project(QtService)
 add_library(QtService STATIC)
 
+target_compile_definitions(QtService PUBLIC QTSERVICE_DEBUG)
+
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
@@ -41,7 +43,7 @@ if (UNIX)
 endif()
 
 target_include_directories(QtService PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>  ${PROJECT_BINARY_DIR})
-set_property(TARGET QtService PROPERTY  MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
+#set_property(TARGET QtService PROPERTY  MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
 target_compile_definitions(QtService PRIVATE  $<CONFIG:Debug>:"_DEBUG"> $<CONFIG:Release>"NDEBUG">  "WIN32;"        "_CONSOLE;"        "UNICODE;"        "_UNICODE"       )
 target_link_libraries(QtService PUBLIC Qt5::Core Qt5::Network user32)
 

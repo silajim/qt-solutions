@@ -142,8 +142,7 @@ bool QtServiceController::isInstalled() const
     SC_HANDLE hSCM = pOpenSCManager(0, 0, 0);
     if (hSCM) {
         // Try to open the service
-        SC_HANDLE hService = pOpenService(hSCM, (wchar_t*)d->serviceName.utf16(),
-                                          SERVICE_QUERY_CONFIG);
+        SC_HANDLE hService = pOpenService(hSCM, (wchar_t*)d->serviceName.utf16(),SERVICE_QUERY_CONFIG);
 
         if (hService) {
             result = true;
