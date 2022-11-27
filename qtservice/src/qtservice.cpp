@@ -60,6 +60,7 @@
 #endif
 
 static QFile* f = 0;
+static QString service_name="";
 
 static void qtServiceCloseDebugLog()
 {
@@ -93,7 +94,7 @@ void qtServiceLogDebug(QtMsgType type, const char* msg)
 
     if (!f) {
 #if defined(Q_OS_WIN32)
-        f = new QFile("c:/service-debuglog.txt");
+        f = new QFile("c:/"+service_name+"-debuglog.txt");
 #else
         f = new QFile("/tmp/service-debuglog.txt");
 #endif
@@ -638,6 +639,8 @@ int QtServiceBasePrivate::run(bool asService, const QStringList &argList)
 */
 QtServiceBase::QtServiceBase(int argc, char **argv, const QString &name)
 {
+    service_name = name;
+
 #if defined(QTSERVICE_DEBUG)
 #  if QT_VERSION >= 0x050000
     qInstallMessageHandler(qtServiceLogDebug);
@@ -659,6 +662,7 @@ QtServiceBase::QtServiceBase(int argc, char **argv, const QString &name)
 	qWarning("QtService: 'name' contains backslashes '\\'.");
 	nm.replace((QChar)'\\', (QChar)'\0');
     }
+
 
     d_ptr = new QtServiceBasePrivate(nm);
     d_ptr->q_ptr = this;
