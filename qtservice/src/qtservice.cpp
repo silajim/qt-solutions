@@ -87,7 +87,7 @@ void qtServiceLogDebug(QtMsgType type, const char* msg)
 #else
     const qulonglong processId = getpid();
 #endif
-    QByteArray s(QTime::currentTime().toString("HH:mm:ss.zzz").toLatin1());
+    QByteArray s(QDateTime::currentDateTime().toString("dd.MM.yyyy-HH:mm:ss").toLatin1());
     s += " [";
     s += QByteArray::number(processId);
     s += "] ";
@@ -138,10 +138,10 @@ void qtServiceLogDebug(QtMsgType type, const char* msg)
     f->write(s);
     f->flush();
 
-    if (type == QtFatalMsg) {
-        qtServiceCloseDebugLog();
-        exit(1);
-    }
+//    if (type == QtFatalMsg) {
+//        qtServiceCloseDebugLog();
+//        exit(1);
+//    }
 }
 
 #endif
@@ -647,7 +647,7 @@ QtServiceBase::QtServiceBase(int argc, char **argv, const QString &name)
 #  else
     qInstallMsgHandler(qtServiceLogDebug);
 #  endif
-    qAddPostRoutine(qtServiceCloseDebugLog);
+//    qAddPostRoutine(qtServiceCloseDebugLog);
 #endif
 
     Q_ASSERT(!QtServiceBasePrivate::instance);
@@ -687,6 +687,7 @@ QtServiceBase::~QtServiceBase()
 {
     delete d_ptr;
     QtServiceBasePrivate::instance = 0;
+    qtServiceCloseDebugLog();
 }
 
 /*!
